@@ -1,6 +1,6 @@
 %set global constants
 global Fs M S b L const showPlots htx hrx ...
-    wc useQAM delayInSamples useIdealChannel BW    
+    wc useQAM delayInSamples useIdealChannel BW preamble
 
 %% Set path to find the folder MatlabOctaveFunctions with functions
 % such as ak_psd.m and folder MatlabOctaveThirdPartyFunctions with
@@ -49,3 +49,14 @@ delayInSamples = 0;
 %% Initialization procedures
 rand('twister',0); %reset uniform random number generator
 randn('state',0); %reset Gaussian random number generator
+
+%% Create a preamble based on a M-sequence. 
+%The code is from a third party and can also be found at:
+%Code\MatlabThirdPartyFunctions\mseq.m
+%you need to make sure you have it in your Matlab "path"
+preambleLength = 1023; %approximate number of preamble samples
+powerVal=floor(log2(preambleLength+1)); %needs to be a power of 2
+preamble=mseq(2,powerVal);
+preambleLength=length(preamble) %update the length value
+Ec=mean(abs(const).^2); %energy constellation in Joules
+preamble = sqrt(Ec/mean(abs(preamble).^2))*preamble;%normalize energy
