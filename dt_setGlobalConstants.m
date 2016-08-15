@@ -16,7 +16,7 @@ Fs=44100; %sampling frequency in Hz
 S=1000; %number of symbols
 L=80; %oversampling factor
 
-%% Channel parameters
+%% Channel parameters for simulation
 useIdealChannel = 0; %set 1 if want ideal channel
 
 %% Transmitter and receiver parameters
