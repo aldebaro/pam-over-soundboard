@@ -1,6 +1,7 @@
 %set global constants
 global Fs M S b L const showPlots htx hrx ...
-    wc useQAM delayInSamples useIdealChannel BW tailLength preamble
+    wc useQAM delayInSamples useIdealChannel BW tailLength ...
+    preamble txBitStream
 
 %% Set path to find the folder MatlabOctaveFunctions with functions
 % such as ak_psd.m and folder MatlabOctaveThirdPartyFunctions with
@@ -20,7 +21,7 @@ useIdealChannel = 0; %set 1 if want ideal channel
 
 %% Transmitter and receiver parameters
 wc=pi/2; %carrier frequency: 0.5*pi rad (or Fs/4 Hz)
-M=4; %number of symbols in alphabet
+M=2; %number of symbols in alphabet
 useQAM=0; %use QAM or PAM
 if useQAM==1
     const=ak_qamSquareConstellation(M); %QAM const.
@@ -61,3 +62,7 @@ preambleLength=length(preamble) %update the length value
 Ec=mean(abs(const).^2); %energy constellation in Joules
 preamble = sqrt(Ec/mean(abs(preamble).^2))*preamble;%normalize energy
 tailLength = 10; %add this number of symbols at the end of each frame
+
+%use the same data for all frames, to simplify BER estimation
+temp=rand(Nbits,1); %random numbers ~[0,1]
+txBitStream=temp>0.5; %bits: 0 or 1

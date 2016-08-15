@@ -1,9 +1,9 @@
 dt_setGlobalConstants %set global variables
-global txBitStream tailLength preamble; %globals used in this code
+global txBitStream tailLength preamble const; %globals used in this code
 
 showPlots=1;%in case want to overwrite value in dt_setGlobalConstants
 
-inputWaveFile = 'pam_transmit.wav'; %signal file to be demodulated
+inputWaveFile = 'recorded_pam.wav'; %signal file to be demodulated
 %inputWaveFile = 'c:\temp\output.wav';
 
 [r,Fs2]=wavread(inputWaveFile); %file with recorded PAM
@@ -36,13 +36,21 @@ for d=1:L %hypothesize the best sampling instant (symbol timing)
         maxlag = lags(find(abs(R)==maxR,1)); %choose first maximum
         maxAbsR = maxR;
     end
+    if showPlots==1
+        if 1 %show eye diagrams
+            clf
+            title(['Start = ' num2str(d)])
+            ak_plotEyeDiagram(d,L,temp);
+            pause
+        end
+    end
 end
 if showPlots==1
     clf
     subplot(221)
     plot(0:length(r)-1,r);
     xlabel('n (samples)'), ylabel('x[n]')
-    title('Received QAM signal');
+    title('Received PAM signal');
     axis tight
     subplot(223)
     temp=ybb_filtered(dbest:L:end);%downsampling from Fs to baud rate
@@ -72,6 +80,11 @@ recoveredSymbols=recoveredSymbols/gainPhaseAdjustment;
 
 %% Decisions (find nearest constellation symbol) and bit conversion
 recoveredSymbols = real(recoveredSymbols); %discard imaginary part
+%perform AGC (automatic gain control) to compensate any channel gain
+receivedSymbolsPower=mean(recoveredSymbols.^2);
+constellationPower = mean(const.^2);
+recoveredSymbols = sqrt(constellationPower/receivedSymbolsPower)*recoveredSymbols;
+
 symbolIndicesRx=ak_pamdemod(recoveredSymbols,M);
 %convert from symbol indices to bits
 rxBitStream = ak_unsliceBitStream(symbolIndicesRx, log2(M));

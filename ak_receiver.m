@@ -3,8 +3,7 @@ function [br, ys]=ak_receiver(r)
 %From received signal r, recover the bitstream br and the received
 %symbols ys, where ys is at the baud rate.
 
-global showPlots wc M hrx L S delayInSamples const ...
-    Fs useIdealChannel phaseCorrection BW
+global showPlots wc M hrx L S delayInSamples const Fs
 
 r=r(:); %make sure it is a column vector
 
