@@ -1,4 +1,9 @@
-%non-stopping transmission of PAM through the sound board DAC
+% IMPORTANT: the signal generated with this script seems to have
+% more distortion than the one using Audacity to playback in loop
+% a wav file. Suggestion: use the script below instead of this:
+%soundBoard_savePAMFrameToTransmitWithAudacity.m
+
+%transmission of PAM through the sound board DAC
 %The bits are organized in frames, with a preamble.
 
 maximumNumberOfIterations = 100; %avoid an eternal loop
