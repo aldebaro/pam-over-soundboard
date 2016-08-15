@@ -11,13 +11,15 @@ dt_setGlobalConstants.m ==> ak_transmitter.m ==> dt_channel.m ==> ak_receiver.m
 ## PAM over sound board
 1) Edit the file dt_setGlobalConstants.m and get familiar with the main simulation parameters. 
 
-2) Use an audio cable to connect your sound board digital-to-analog converter (DAC) to an analog-to-digital converter (ADC), which may be at the same or in another computer. The computer using the DAC is the transmitter (Tx) and the one using the ADC is the receiver (Rx)
+2) Use an audio cable to connect your sound board digital-to-analog converter (DAC) to an analog-to-digital converter (ADC), which may be at the same or in another computer. The computer using the DAC is the transmitter (Tx) and the one using the ADC is the receiver (Rx). Test things trasmitting a song from Tx and listening it after recording with Rx, to proper set the audio volume to avoid signal saturation.
 
-3) Tell the Tx to output the PAM signal using soundBoard_continuouslyTransmitPAM.m. With the Rx, using Audacity, start recording the ADC input as a mono (not stereo) signal, with the sampling frequency Fs you are using. Stop at some point and save the received signal at Rx as a WAV file.
+3) Use soundBoard_savePAMFrameToTransmitWithAudacity.m to save a WAV file with a PAM signal.
 
-4) Having the recorded WAV, edit soundBoard_offlineReceivePAM.m to provide the WAV file name and then execute soundBoard_offlineReceivePAM.m to demodulate the PAM signal.
+4) Using Audacity (menu Transport => Loop play) at Tx, playback in a loop the file recored in the previous step. Using another copy of Audacity at Rx, start recording the ADC input as a mono (not stereo) signal, with the sampling frequency Fs you are using at Tx. Stop at some point and save the received signal at Rx as a WAV file. Avoid having silence or noise at the beginning or end of file.
 
-Obs: you can use soundBoard_continuouslyTransmitPAM.m to save a signal segment (frame) in a WAV file without transmitting it throught an audio cable. This allows a more controlled operation because there is no channel (no distortion nor noise) and is useful for learning and debugging.
+5) Having the recorded WAV, edit soundBoard_offlineReceivePAM.m to provide the WAV file name and then execute soundBoard_offlineReceivePAM.m to demodulate the PAM signal.
+
+Obs: You can process a WAV file without transmitting it throught an audio cable. This allows a more controlled operation because there is no channel (no distortion nor noise) and is useful for learning and debugging.
 
 # Additional software
 
