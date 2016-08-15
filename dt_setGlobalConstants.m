@@ -2,6 +2,12 @@
 global Fs M S b L const showPlots htx hrx ...
     wc useQAM delayInSamples useIdealChannel BW    
 
+%% Set path to find the folder MatlabOctaveFunctions with functions
+% such as ak_psd.m and folder MatlabOctaveThirdPartyFunctions with
+% mseq.m
+addpath('../dsp-telecom-book-code/MatlabOctaveFunctions');
+addpath('../dsp-telecom-book-code/MatlabOctaveThirdPartyFunctions');
+
 %% General parameters
 showPlots=1; %use 1 to show plots
 %shouldWriteEPS=1; %write output EPS files (with print -depsc)
