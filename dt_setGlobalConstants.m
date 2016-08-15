@@ -13,7 +13,7 @@ addpath('../dsp-telecom-book-code/MatlabOctaveThirdPartyFunctions');
 showPlots=1; %use 1 to show plots
 %shouldWriteEPS=1; %write output EPS files (with print -depsc)
 Fs=44100; %sampling frequency in Hz
-S=1000; %number of symbols
+S=1000; %number of symbols per frame
 L=80; %oversampling factor
 
 %% Channel parameters for simulation
