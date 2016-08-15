@@ -35,9 +35,13 @@ https://www.youtube.com/playlist?list=PLlPCaGk10CBs3vBQAvw9oJ1VBGikjYJJX
 Playlist at youtube discussing digital filtering:
 https://www.youtube.com/playlist?list=PLlPCaGk10CBs7YCYKnVmsRMj1K8H1kjay
 
+# Example
+
+The file recorded_pam.wav is a binary (M=2 symbols) PAM, recorded with the Tx being a Sony laptop and the Rx a Dell laptop. The computers were connected via an audio cable. The PAM signal has a symbol rate of Rsym = 551.25 bauds, which coincides with the rate R = 551.25 bps (bits / sec). The original script soundBoard_offlineReceivePAM.m is not able to decode without errors because Tx and Rx have a frequency offset. Script ak_fftBasedPAMCarrierRecovery.m gives an idea on how to find the offset but it is not complete.
+
 # Troubleshooting
 
-warning: the 'pwelch' function belongs to the signal package from Octave Forge
+1) warning: the 'pwelch' function belongs to the signal package from Octave Forge
 which seems to not be installed in your system.
 
 When running dt_main_transmission_simulation on Octave, you will need to install the signal package. It is recommended that you install only the packages that you need. But in case you want to install all packages, google it. For example, assuming Octave on Ubuntu, check https://ubuntuforums.org/showthread.php?t=1552607 that suggests using at the terminal prompt:
