@@ -1,6 +1,6 @@
 %set global constants
 global Fs M S b L const showPlots htx hrx ...
-    wc useQAM delayInSamples useIdealChannel BW preamble
+    wc useQAM delayInSamples useIdealChannel BW tailLength preamble
 
 %% Set path to find the folder MatlabOctaveFunctions with functions
 % such as ak_psd.m and folder MatlabOctaveThirdPartyFunctions with
@@ -60,3 +60,4 @@ preamble=mseq(2,powerVal);
 preambleLength=length(preamble) %update the length value
 Ec=mean(abs(const).^2); %energy constellation in Joules
 preamble = sqrt(Ec/mean(abs(preamble).^2))*preamble;%normalize energy
+tailLength = 10; %add this number of symbols at the end of each frame

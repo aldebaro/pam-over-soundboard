@@ -10,7 +10,6 @@ outputWavFile = 'pam_transmit.wav';
 %use the same data for all frames, to simplify BER estimation
 temp=rand(Nbits,1); %random numbers ~[0,1]
 txBitStream=temp>0.5; %bits: 0 or 1
-tailLength = 10; %add this number of symbols at the end of each frame
 
 %cannot send preamble like that because it has too large BW
 preambleLength=length(preamble);
