@@ -37,7 +37,7 @@ for d=1:L %hypothesize the best sampling instant (symbol timing)
         maxAbsR = maxR;
     end
     if showPlots==1
-        if 1 %show eye diagrams
+        if 0 %show eye diagrams (use 0 to disable)
             clf
             title(['Start = ' num2str(d)])
             ak_plotEyeDiagram(d,L,temp);
@@ -99,8 +99,10 @@ net_rate_bps = gross_rate_bps * (S/(S+preambleLength+tailLength))
 
 if showPlots==1
     subplot(224)
-    plot(real(recoveredSymbols), imag(recoveredSymbols), 'x', ...
-        'markersize',16);
+    %try N=200 and carrier offset does not hurt too much
+    N=length(recoveredSymbols); 
+    plot(real(recoveredSymbols(1:N)), imag(recoveredSymbols(1:N)),...
+        'x', 'markersize',16);
     title('Equalized received symbols'); grid
 end
 
